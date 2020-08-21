@@ -15,17 +15,12 @@ class Ui_Container(object):
 
         hBox = QtWidgets.QHBoxLayout()
 
-        # topLeft = QtWidgets.QFrame()
-        # topLeft.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        topLeft = QtWidgets.QFrame()
+        topLeft.setFrameShape(QtWidgets.QFrame.StyledPanel)
 
-        topLeft = QtWidgets.QWidget(Container)
-        # topLeft.setFrameShape(QtWidgets.QFrame.StyledPanel)
-
-        # topRightTop = QtWidgets.QFrame()
-        # topRightTop.setFrameShape(QtWidgets.QFrame.StyledPanel)
-
-        topRightTop = QtWidgets.QWidget(Container)
-        # topRightTop.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        topRightTop = QtWidgets.QFrame()
+        topRightTop.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        topRightTop.setVisible(True)
 
         topRightBottom = QtWidgets.QFrame()
         topRightBottom.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -38,21 +33,21 @@ class Ui_Container(object):
         splitterTopRight.addWidget(topRightTop)
         splitterTopRight.addWidget(topRightBottom)
         splitterTopRight.setSizes([100, 400])
-        splitterTopRight.setDisabled(True)
+        # splitterTopRight.setDisabled(True)
 
         # 上部分左右窗口分割
         splitterTop = QtWidgets.QSplitter(QtCore.Qt.Horizontal) # Qt.Vertical 垂直   Qt.Horizontal 水平
         splitterTop.addWidget(topLeft)
         splitterTop.addWidget(splitterTopRight)
         splitterTop.setSizes([700,300])
-        splitterTop.setDisabled(True)
+        # splitterTop.setDisabled(True)
         
         # 整体布局上下窗口分割
         splitterBottom = QtWidgets.QSplitter(QtCore.Qt.Vertical)
         splitterBottom.addWidget(splitterTop)
         splitterBottom.addWidget(bottom)
         splitterBottom.setSizes([500,200])
-        splitterBottom.setDisabled(True)
+        # splitterBottom.setDisabled(True)
 
         # 设置窗口伸缩属性
         splitterTopRight.setStretchFactor(0, 0)
@@ -72,7 +67,7 @@ class Ui_Container(object):
         self.btnReg.setEnabled(True)
 
         # 添加开始按键
-        self.btnStart = QtWidgets.QPushButton()
+        self.btnStart = QtWidgets.QPushButton(topRightTop)
         # self.btnStart.setGeometry(QtCore.QRect(550, 220, 80, 30))
         self.btnStart.setFont(font)
         self.btnStart.setFocusPolicy(QtCore.Qt.NoFocus)
@@ -85,7 +80,7 @@ class Ui_Container(object):
         self.timeLabel = QtWidgets.QLabel(topRightTop)
         self.timeLabel.setFixedWidth(200)
         self.timeLabel.setStyleSheet("QLabel{color:rgb(0, 0, 0);font-size:30px;font-weight:bold;font-family:宋体;}" )
-        self.timeLabel.setText("01 : 59 : 59")
+        self.timeLabel.setText("00 : 00 : 00")
 
         # 上右上布局
         vBoxTopRightTop = QtWidgets.QVBoxLayout()
@@ -109,14 +104,16 @@ class Ui_Container(object):
         # 添加事件列表
         self.eventListView = QtWidgets.QListView(topRightBottom)
         self.eventListModel = QtCore.QStringListModel()
-        self.list = ["[2020-08-20 10:00]: 空位事件","[2020-08-20 10:03]: 作弊事件", "[2020-08-20 10:10]: 作弊事件", "[2020-08-20 10:15]: 替考事件",
-                            "[2020-08-20 10:00]: 空位事件","[2020-08-20 10:03]: 作弊事件", "[2020-08-20 10:10]: 作弊事件", "[2020-08-20 10:15]: 替考事件"]
-        self.eventListModel.setStringList(self.list)
-        self.eventListView.setModel(self.eventListModel)
         self.eventListView.setStyleSheet("QListView{border-width:0;border-style:outset;color:rgb(0, 0, 0);}")
-        # self.eventListView.setVerticalScrollBar = False
-        # self.eventListView.setVerticalScrollBarPolicy = False
-        # self.eventListView.setVerticalScrollMode(QtCore.ScrollPerItem)
+
+        # self.list = ["[2020-08-20 10:00]: 空位事件","[2020-08-20 10:03]: 作弊事件", "[2020-08-20 10:10]: 作弊事件", "[2020-08-20 10:15]: 替考事件",
+        #                     "[2020-08-20 10:00]: 空位事件","[2020-08-20 10:03]: 作弊事件", "[2020-08-20 10:10]: 作弊事件", "[2020-08-20 10:15]: 替考事件",
+        #                     "[2020-08-20 10:00]: 空位事件","[2020-08-20 10:03]: 作弊事件", "[2020-08-20 10:10]: 作弊事件", "[2020-08-20 10:15]: 替考事件",
+        #                     "[2020-08-20 10:00]: 空位事件","[2020-08-20 10:03]: 作弊事件", "[2020-08-20 10:10]: 作弊事件", "[2020-08-20 10:15]: 替考事件"]
+        # self.eventListModel.setStringList(self.list)
+        self.eventListView.setModel(self.eventListModel)
+        
+
         # eventListView.clicked.connect(self.onClickedListView)
 
         # 上右下布局
@@ -127,7 +124,7 @@ class Ui_Container(object):
 
         # 添加日志显示标签
         self.logTextBrowser = QtWidgets.QTextBrowser(bottom)
-        self.logTextBrowser.setText("[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n")
+        # self.logTextBrowser.setText("[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n[OK]: 获取人脸图像\r\n")
         self.logTextBrowser.setStyleSheet("QTextBrowser{border-width:0;border-style:outset;color:rgb(0, 0, 0)}")
 
         # 下布局
@@ -138,6 +135,9 @@ class Ui_Container(object):
         # # 添加视频显示标签
         self.cameraLabel = QtWidgets.QLabel(topLeft)
         self.cameraLabel.setMinimumSize(QtCore.QSize(700, 500))
+        self.cameraLabel.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.cameraLabel.setPixmap(QtGui.QPixmap("./res/image_logo.png").scaled(150, 150))
 
         hBox.addWidget(splitterBottom)
         Container.setLayout(hBox)
